@@ -2,7 +2,7 @@
 
 - Using P5.js Three.js Vite.js
 - You may click on the canvas to play the audio 🔉
-- Find the different experiments under `js/experiments`
+- Find the different experiments under `js/experiments` with the according shaders in `js/shaders`
 
 ## Setup
 

@@ -1,5 +1,8 @@
 import audioSrc from '../assets/audio/03.mp3'
 
+/**
+ * Complex visualisation elements setup based on the audio data
+ */
 const start = (sketch) => {
   const bins = 64
 
