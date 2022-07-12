@@ -1,6 +1,8 @@
 # P5 Audio Reactive Visualization
 
-- click on the canvas to play the audio 🔉
+- Using P5.js Three.js Vite.js
+- You may click on the canvas to play the audio 🔉
+- Find the different experiments under `js/experiments`
 
 ## Setup
 
