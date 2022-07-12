@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-family: Arial, Helvetica, Arial, sans-serif;
 }
 
 .play-button {
@@ -26,4 +27,19 @@ body {
 
 .play-button:focus {
   outline: none;
+}
+
+.container {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+
+  color: aliceblue;
 }
