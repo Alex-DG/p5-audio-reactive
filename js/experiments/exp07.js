@@ -1,4 +1,4 @@
-import audioSrc from '../assets/audio/02.mp3'
+import audioSrc from '../assets/audio/01.mp3'
 
 const start = (sketch) => {
   let myShaders
