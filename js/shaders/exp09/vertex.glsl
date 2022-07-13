@@ -17,7 +17,6 @@ uniform float uBass;
 uniform float uAmplitude;
 uniform float uFrequency;
 varying vec2 vTexCoord;
-varying float vDisplacement;
 
 //
 // GLSL textureless classic 3D noise "cnoise",
@@ -203,14 +202,12 @@ void main() {
 
   newNormal += uFrequency;
 
-  float disp = uAmplitude * pnoise(uFrequency + newNormal, vec3(0.0)) * 1.5;
-  vec3 newPosition = aPosition + disp * newNormal * 2.0;
+  float disp = uAmplitude * pnoise(uFrequency + newNormal, vec3(0.0)) * 0.2;
+  vec3 newPosition = aPosition + disp * newNormal * 1.0;
 
   vNoise = cnoise(newPosition);
 
   vTexCoord = aTexCoord;
 
   gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(newPosition, 1.0);
-
-  vDisplacement = disp;
 }

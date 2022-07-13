@@ -30,7 +30,6 @@ body {
 }
 
 .container {
-  margin-top: 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,10 +50,43 @@ body {
   -webkit-transition: opacity 0.5s ease-out;
 }
 
+.container.title {
+  align-items: flex-end;
+  right: 1.5em;
+}
 .container.loading {
   height: 100% !important;
   opacity: 1;
 
   transition: opacity 0.5s ease-out;
   -webkit-transition: opacity 0.5s ease-out;
+}
+
+.text {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 90001;
+  font-size: 25vh;
+  line-height: 0.8;
+  mix-blend-mode: difference;
+  pointer-events: none;
+
+  transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+}
+
+span {
+  display: block;
+  color: #fff;
+}
+
+#fullscreen {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 2vw;
+  cursor: pointer;
 }
