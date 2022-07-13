@@ -10,12 +10,17 @@ uniform vec2 uResolution;
 uniform float uTime;
 uniform float uFrequency;
 uniform float uAmp;
-
 uniform sampler2D uDmap;
 
 mat2 scale(vec2 _scale) {
   return mat2(_scale.x, 0.0, 0.0, _scale.y);
 }
+
+// void main() {
+//   vec3 color = vec3(vTexCoord.y);
+
+//   gl_FragColor = vec4(color, 1.0);
+// }
 
 void main() {
 
@@ -31,19 +36,18 @@ void main() {
 
   uv.y = 1.0 - uv.y;
 
-  vec4 dMap = texture2D(uDmap, uv);
-
-  float dMapColor = dot(dMap.rgb, vec3(uFrequency));
-
-  float displacement = dMapColor * uAmp;
-
   uv -= vec2(0.5);
-  // uv = scale(2.0 - vec2(sin(displacement) + 1.0, 1.0)) * uv; // only  X
-  // uv = scale(2.0 - vec2(1.0, sin(displacement) + 1.0)) * uv; // only Y
-  uv = scale(2.0 - vec2(sin(displacement) + 1.0)) * uv; // both!
+  uv = scale(vec2(0.91)) * uv;
   uv += vec2(0.5);
-  
-  vec4 texture = texture2D(uTexture, uv);
+
+  float frequency = uFrequency;
+  float amplitude = uAmp;
+
+  float distortion = sin(uv.y * frequency + (uTime * 0.01)) * amplitude;
+  // float distortion = sin(uv.x * frequency + (uTime * 0.1)) * amplitude;
+  // float distortion = sin(uv.y * frequency + (uTime * 0.2)) * amplitude;
+
+  vec4 texture = texture2D(uTexture, uv + distortion);
 
   gl_FragColor = texture;
 }

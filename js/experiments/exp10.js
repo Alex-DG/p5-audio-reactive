@@ -1,6 +1,5 @@
-import audioSrc from '../assets/audio/01.mp3'
+import audioSrc from '../assets/audio/02.mp3'
 import imageSrc from '../assets/images/01.jpg'
-import dMapSrc from '../assets/images/displacement.jpg'
 
 const start = (sketch) => {
   let myShader
@@ -11,14 +10,10 @@ const start = (sketch) => {
   let fft
   let beatDetect
   let bgColor = 0
-  let dMap
-
-  const texts = [...document.querySelectorAll('.text span')]
 
   let isShaderLoaded = false
   let isAudioLoaded = false
   let isImageLoaded = false
-  let isdMapLoaded = false
   let isReady = false
 
   const togglePlay = () => {
@@ -44,12 +39,9 @@ const start = (sketch) => {
   const onImageLoaded = () => {
     isImageLoaded = true
   }
-  const ondMapLoaded = () => {
-    isdMapLoaded = true
-  }
+
   const initDom = () => {
-    const isPreloadReady =
-      isShaderLoaded && isAudioLoaded && isImageLoaded && isdMapLoaded
+    const isPreloadReady = isShaderLoaded && isAudioLoaded && isImageLoaded
     const isInitDom = !isReady && isPreloadReady
     if (isInitDom) {
       isReady = true
@@ -71,7 +63,6 @@ const start = (sketch) => {
     myShader = loadShader(vertex, fragment, onShaderLoaded)
     audio = loadSound(audioSrc, onAudioLoaded)
     img = loadImage(imageSrc, onImageLoaded)
-    dMap = loadImage(dMapSrc, ondMapLoaded)
   }
 
   sketch.setup = () => {
@@ -87,7 +78,6 @@ const start = (sketch) => {
     shader(myShader)
 
     myShader.setUniform('uTexture', img)
-    myShader.setUniform('uDmap', dMap)
     myShader.setUniform('uResolution', [width, height])
     myShader.setUniform('uTextureResolution', [img.width, img.height])
   }
@@ -104,8 +94,8 @@ const start = (sketch) => {
     let freq = fft.getCentroid()
     freq *= 0.001
 
-    const mapA = map(volume, 0, 1, 0, 0.9)
-    const mapF = map(freq, 0, 1, 0, 0.2)
+    const mapA = map(volume, 0, 1, 0, 0.05)
+    const mapF = map(freq, 0, 1, 0, 10)
 
     myShader.setUniform('uTime', frameCount)
 
