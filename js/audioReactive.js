@@ -6,6 +6,10 @@ const start = (sketch) => {
   let canvas
   let amp, fft
 
+  let isShaderLoaded = false
+  let isAudioLoaded = false
+  let isReady = false
+
   const togglePlay = () => {
     if (audio.isPlaying()) {
       audio.pause()
@@ -14,12 +18,34 @@ const start = (sketch) => {
     }
   }
 
+  const onShaderLoaded = () => {
+    isShaderLoaded = true
+  }
+  const onAudioLoader = () => {
+    isAudioLoaded = true
+  }
+
+  const initDom = () => {
+    const isInitDom = !isReady && isShaderLoaded && isAudioLoaded
+    if (isInitDom) {
+      isReady = true
+      const titleDom = document.getElementById('title')
+      const loadingDom = document.querySelector('.loading')
+
+      loadingDom.style.opacity = '0'
+      setTimeout(() => {
+        loadingDom.style.display = 'none'
+        titleDom.style.opacity = '1'
+      }, 1000)
+    }
+  }
+
   sketch.preload = () => {
     const vertex = new URL('./shaders/vertex.glsl', import.meta.url)
     const fragment = new URL('./shaders/fragment.glsl', import.meta.url)
 
-    myShaders = loadShader(vertex, fragment)
-    audio = loadSound(audioSrc)
+    myShaders = loadShader(vertex, fragment, onShaderLoaded)
+    audio = loadSound(audioSrc, onAudioLoader)
   }
 
   sketch.setup = () => {
@@ -33,6 +59,8 @@ const start = (sketch) => {
   }
 
   sketch.draw = () => {
+    initDom()
+
     background(0)
 
     fft.analyze()

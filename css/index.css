@@ -43,3 +43,18 @@ body {
 
   color: aliceblue;
 }
+
+.container > #title {
+  opacity: 0;
+
+  transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+}
+
+.container.loading {
+  height: 100% !important;
+  opacity: 1;
+
+  transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+}
