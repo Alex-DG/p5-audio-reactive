@@ -73,11 +73,9 @@ const start = (sketch) => {
       const loadingDom = document.querySelector('.loading')
 
       loadingDom.style.opacity = '0'
-      setTimeout(() => {
-        loadingDom.style.display = 'none'
-        titleDom.style.opacity = '1'
-        textDom.style.opacity = '1'
-      }, 1000)
+      loadingDom.style.display = 'none'
+      titleDom.style.opacity = '1'
+      textDom.style.opacity = '1'
     }
   }
 
